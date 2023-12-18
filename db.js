@@ -20,7 +20,7 @@ export function getModel(collection='patients'){ // Which specific collection to
         gender: String,
         phoneNumber: String,
         resAddress: String,
-        emergencyContact: {EContact}
+        emergencyContact: EContact
     })
 
     switch (collection) {
