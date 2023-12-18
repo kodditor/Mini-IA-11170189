@@ -31,6 +31,13 @@ export function getModel(collection='patients'){ // Which specific collection to
         vitals: vitals
     })
 
+    const visitation = new mongoose.Schema({
+        id: String,
+        patientID: String,
+        type: String,
+        createdAt: Date
+    })
+
     switch (collection) {
         case 'patients':
             try {
@@ -39,7 +46,12 @@ export function getModel(collection='patients'){ // Which specific collection to
                 return mongoose.model('patients')
             }
             break;
-    
+        case 'visitation': 
+            try {
+                return mongoose.model('visitations', visitation)
+            } catch (error) {
+                return mongoose.model('visitations')
+            }
         default:
             break;
     }
