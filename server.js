@@ -17,6 +17,18 @@ app.get('/patients', async (req,res) => {
     res.status(200).send(allPatients)
 })
 
+app.get('/patient/:patientID', async (req, res) => {
+    const patientID = req.params.patientID
+    const model = getModel()
+    const patient = await model.find({'patientID': patientID})
+    if(patient) {
+        res.status(200).json(patient)
+    } else {
+        res.status(404).send(`Error: Could not find patient with id: ${patientID}`)
+    }
+
+})
+
 app.post('/patient', async (req, res) => {
     const patientObject = req.body
     const model = getModel()
