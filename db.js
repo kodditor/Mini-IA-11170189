@@ -4,7 +4,7 @@ export async function connectDB(){
     await mongoose.connect('mongodb://localhost:27017/UGMC')
 }
 
-export async function getModel(collection='patients'){ // Which specific collection to call from // UGMC created on local/cloud DB
+export function getModel(collection='patients'){ // Which specific collection to call from // UGMC created on local/cloud DB
     
     const EContact = new mongoose.Schema({
         name: String,
@@ -20,7 +20,7 @@ export async function getModel(collection='patients'){ // Which specific collect
         gender: String,
         phoneNumber: String,
         resAddress: String,
-        emergencyContact: EContact
+        emergencyContact: {EContact}
     })
 
     switch (collection) {
