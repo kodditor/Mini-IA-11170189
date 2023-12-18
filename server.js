@@ -67,6 +67,23 @@ app.post('/patient/:patientID/vitals', async (req, res) =>{
     }
 })
 
+app.post('/patient/:patientID/visitation', async(req, res)=> {
+    const patientID = req.params.patientID
+    
+    const visitation = req.body
+
+    visitation.patientID = patientID
+    visitation.createdAt = new Date()
+
+    const model = getModel('visitation')
+    const newVisitation = await model.insertMany(visitation)
+
+    if(newVisitation) {
+        res.status(200).json(newVisitation)
+    } else {
+        res.status(404).send(`Error: Could not insert record`)
+    }
+})
 
 app.listen(PORT, ()=>{
     console.log(`Started server at http://localhost:${PORT}`)
