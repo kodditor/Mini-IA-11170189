@@ -13,6 +13,12 @@ export function getModel(collection='patients'){ // Which specific collection to
         relationship: String,
     })
 
+    const vitals = new mongoose.Schema({
+        temperature: Number,
+        bloodPressure: Number,
+        pulse: Number,
+        SPO2: Number,
+    })
     const patients = new mongoose.Schema({
         patientID: String,
         surname : String,
@@ -20,7 +26,9 @@ export function getModel(collection='patients'){ // Which specific collection to
         gender: String,
         phoneNumber: String,
         resAddress: String,
-        emergencyContact: EContact
+        createdAt: Date,
+        emergencyContact: EContact,
+        vitals: vitals
     })
 
     switch (collection) {
